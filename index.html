@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechDeshi | Best Tech Prices in Bangladesh</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Scripts -->
+    <script src="js/data.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/filters.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">TechDeshi</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Deals</a></li>
+                    <li><a href="#">Components</a></li>
+                    <li><a href="#">Laptops</a></li>
+                    <li><a href="#">Peripherals</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero & Search Section -->
+        <section class="hero">
+            <h1>Find Best Tech Deals in BD</h1>
+            <p>Compare prices from Ryans, Star Tech, Tech Land, and more instantly.</p>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="search-icon">🔍</i>
+                    <input type="text" 
+                           id="search-input" 
+                           class="search-input" 
+                           placeholder="Search product (e.g. '980 Pro SSD' or 'RTX 4060')..."
+                           autocomplete="off">
+                    <div id="autocomplete-list" class="autocomplete-dropdown">
+                        <!-- Autocomplete items inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="content-wrapper">
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar">
+                <div class="filter-section">
+                    <div class="filter-title">Price Range</div>
+                    <div id="price-range-label" style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--primary-light)">
+                        ৳0 - ৳200,000
+                    </div>
+                    <div class="price-range-inputs">
+                        <input type="number" id="price-min" class="price-input" placeholder="Min" value="0">
+                        <input type="number" id="price-max" class="price-input" placeholder="Max" value="200000">
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Brands</div>
+                    <div id="brand-filters">
+                        <!-- Brand checkboxes inserted here -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Availability</div>
+                    <label class="filter-option">
+                        <input type="checkbox" id="stock-filter">
+                        In Stock Only
+                    </label>
+                </div>
+
+                <button id="clear-filters" class="clear-filters-btn">
+                    Reset Filters
+                </button>
+            </aside>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="results-header">
+                    <div id="results-count" class="results-count">Loading...</div>
+                    <select id="sort-select" class="sort-dropdown">
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="availability">Stock Availability</option>
+                        <option value="rating">Best Rated Sellers</option>
+                    </select>
+                </div>
+
+                <div id="products-grid" class="products-grid">
+                    <div class="loading">Searching best deals...</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Recommendations Section -->
+        <section class="recommendations">
+            <h2>Trending Right Now</h2>
+            <div id="recommendations-grid" class="recommendations-grid">
+                <!-- Recommendations inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TechDeshi. All rights reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6">
+                Prices are for demonstration purposes. Not affiliated with any listed sellers.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

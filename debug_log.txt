@@ -1,0 +1,17 @@
+Testing scrapers...
+Starting scrapers for: "monitor"
+Scraping Star Tech: https://www.startech.com.bd/product/search?search=monitor
+Scraping Ryans: https://www.ryanscomputers.com/search?q=monitor
+[Puppeteer] Launching for Ryans Computers...
+Scraping TechLand: https://www.techlandbd.com/index.php?route=product/search&search=monitor
+Scraping Global Brand: https://www.globalbrand.com.bd/index.php?route=product/search&search=monitor
+Scraping Computer Village: https://www.computervillage.com.bd/index.php?route=product/search&search=monitor
+[Puppeteer] Launching for Computer Mania BD...
+[Puppeteer] Launching for Pickaboo...
+[Puppeteer] Launching for Daraz...
+Retrying Laptop BD (2 left) - Error: Hostname/IP does not match certificate's altnames: Host: www.laptopbd.com. is not in the cert's altnames: DNS:*.web-hosting.com, DNS:web-hosting.com (N/A)
+Retrying Laptop BD (1 left) - Error: Hostname/IP does not match certificate's altnames: Host: www.laptopbd.com. is not in the cert's altnames: DNS:*.web-hosting.com, DNS:web-hosting.com (N/A)
+Failed to fetch https://www.laptopbd.com/index.php?route=product/search&search=monitor after retries: Hostname/IP does not match certificate's altnames: Host: www.laptopbd.com. is not in the cert's altnames: DNS:*.web-hosting.com, DNS:web-hosting.com (N/A)
+Found 114 total products from scrapes.
+Results found: 114
+Counts per seller:
