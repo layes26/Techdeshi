@@ -25,28 +25,40 @@ class ScraperManager {
     }
 
     async searchAll(query) {
-        console.log(`Starting scrapers for: "${query}"`);
+        console.log(`\n--- Starting scrapers for: "${query}" ---`);
+        const startTime = Date.now();
 
-        // Run scrapers in parallel with error handling
-        const results = await Promise.all(
-            this.scrapers.map(async (scraper) => {
-                try {
-                    return await scraper.search(query);
-                } catch (err) {
-                    console.error(`Scraper failed for ${scraper.sourceName}:`, err.message);
-                    return [];
-                }
-            })
-        );
+        // Run scrapers in batches to prevent resource exhaustion
+        const BATCH_SIZE = 3;
+        const allResults = [];
 
-        // Flatten results
-        const allProducts = results.flat();
-        console.log(`Found ${allProducts.length} total products from scrapes.`);
+        for (let i = 0; i < this.scrapers.length; i += BATCH_SIZE) {
+            const batch = this.scrapers.slice(i, i + BATCH_SIZE);
+            console.log(`Scraping batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(this.scrapers.length / BATCH_SIZE)}...`);
+
+            const batchResults = await Promise.all(
+                batch.map(async (scraper) => {
+                    try {
+                        const start = Date.now();
+                        const results = await scraper.search(query);
+                        console.log(`[${scraper.sourceName}] Found ${results.length} products in ${Date.now() - start}ms`);
+                        return results;
+                    } catch (err) {
+                        console.error(`Scraper failed for ${scraper.sourceName}:`, err.message);
+                        return [];
+                    }
+                })
+            );
+            allResults.push(...batchResults.flat());
+        }
+
+        const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+        console.log(`--- Finished scraping. Found ${allResults.length} total products in ${duration}s ---\n`);
 
         // Process and Save to DB
-        this.saveResults(allProducts);
+        this.saveResults(allResults);
 
-        return allProducts;
+        return allResults;
     }
 
     saveResults(scrapedProducts) {
