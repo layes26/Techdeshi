@@ -22,6 +22,7 @@ const scraperManager = require('./scraper_manager');
 // Search Products
 app.get('/api/search', async (req, res) => {
     const { q } = req.query;
+    console.log(`[API] received search request for: "${q}"`);
     if (!q) return res.status(400).json({ error: 'Query parameter required' });
 
     try {
