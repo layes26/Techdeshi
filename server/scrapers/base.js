@@ -60,12 +60,27 @@ class BaseScraper {
         console.log(`[Puppeteer] Launching for ${this.sourceName}...`);
         let browser = null;
         try {
-            // Lazy load puppeteer
-            const puppeteer = require('puppeteer');
-            browser = await puppeteer.launch({
+            let puppeteer;
+            let launchOptions = {
                 headless: 'new',
                 args: ['--no-sandbox', '--disable-setuid-sandbox']
-            });
+            };
+
+            if (process.env.VERCEL) {
+                // Vercel specific puppeteer configuration
+                const chromium = require('@sparticuz/chromium');
+                puppeteer = require('puppeteer-core');
+
+                // Set executable path for chromium
+                launchOptions.executablePath = await chromium.executablePath();
+                launchOptions.args = [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'];
+                launchOptions.headless = chromium.headless;
+            } else {
+                // Local development
+                puppeteer = require('puppeteer');
+            }
+
+            browser = await puppeteer.launch(launchOptions);
             const page = await browser.newPage();
 
             // Set User Agent
