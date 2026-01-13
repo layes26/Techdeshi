@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from root
+// Vercel handles static files automatically from the root, but this is good for local testing
 app.use(express.static(path.join(__dirname, '../')));
 
 // API Routes
@@ -101,9 +102,13 @@ app.get('/api/seed', (req, res) => {
     res.json({ message: 'Seeded sample data' });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
 
 // Keep process alive
 setInterval(() => { }, 1000);
